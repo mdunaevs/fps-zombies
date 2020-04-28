@@ -8,6 +8,7 @@ public class EnemyScript : MonoBehaviour
     public float enemyHealth = 100f;
     EnemyAI enemyAI;
 
+    private bool killingEnemy = false;
     CapsuleCollider enemyCollider;
 
 
@@ -22,7 +23,7 @@ public class EnemyScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (enemyHealth <= 0){
+        if (enemyHealth <= 0 && !killingEnemy){
             EnemyDead();
         }
     }
@@ -32,6 +33,7 @@ public class EnemyScript : MonoBehaviour
     }
 
     public void EnemyDead(){
+        killingEnemy = true;
         enemyAI.EnemyDeathAnim();
         enemyCollider.enabled = false;
         Destroy(this.gameObject, 5);

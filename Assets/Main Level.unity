@@ -7131,6 +7131,7 @@ GameObject:
   - component: {fileID: 2014330371}
   - component: {fileID: 2014330372}
   - component: {fileID: 2014330373}
+  - component: {fileID: 2014330374}
   m_Layer: 0
   m_Name: First Person Player
   m_TagString: Player
@@ -7200,3 +7201,18 @@ MonoBehaviour:
   roofMask:
     serializedVersion: 2
     m_Bits: 512
+--- !u!114 &2014330374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2014330370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e967f8a5585a4387956aef37ae83698, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 0
+  maxHealth: 30
+  isDead: 0
