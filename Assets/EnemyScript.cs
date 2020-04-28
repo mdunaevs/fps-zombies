@@ -5,13 +5,18 @@ using UnityEngine;
 public class EnemyScript : MonoBehaviour
 {
 
-    public float enemyHealth = 100.0f;
+    public float enemyHealth = 100f;
+    EnemyAI enemyAI;
+
+    CapsuleCollider enemyCollider;
+
 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        enemyAI = GetComponent<EnemyAI>();
+        enemyCollider = GetComponent<CapsuleCollider>();
     }
 
     // Update is called once per frame
@@ -27,6 +32,8 @@ public class EnemyScript : MonoBehaviour
     }
 
     public void EnemyDead(){
-        Destroy(this.gameObject);
+        enemyAI.EnemyDeathAnim();
+        enemyCollider.enabled = false;
+        Destroy(this.gameObject, 5);
     }
 }
