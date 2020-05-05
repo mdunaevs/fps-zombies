@@ -30,7 +30,7 @@ public class EnemyAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(PlayerHealth.singleton.isDead){
+        if(PlayerHealth.singleton.isDead || isDead){
             DisableEnemy();
             return;
         }
@@ -71,7 +71,7 @@ public class EnemyAI : MonoBehaviour
         canAttack = false;
         anim.SetBool("isWalking", false);
         anim.SetBool("isAttacking", false);
-        //agent.updatePosition = false;
+        agent.updatePosition = false;
     }
     IEnumerator AttackTime(){
         canAttack = false;

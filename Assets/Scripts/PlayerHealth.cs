@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class PlayerHealth : MonoBehaviour
 
     private bool canRegenerate = true;
     public bool isDead = false;
+    public Slider healthSlider;
 
     private void Awake(){
         singleton = this;
@@ -21,6 +23,7 @@ public class PlayerHealth : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
+        healthSlider.value = maxHealth;
     }
 
     // Update is called once per frame
@@ -38,13 +41,16 @@ public class PlayerHealth : MonoBehaviour
     public void DamagePlayer(float damage){
         if(currentHealth > 0){
             currentHealth -= damage;
+            healthSlider.value -= damage;
         }
+        
     }
 
     void Dead(){
         isDead = true;
         StopAllCoroutines();
         Debug.Log("player is dead");
+        healthSlider.value = 0;
     }
 
     IEnumerator RegenerateHealth(){
@@ -52,9 +58,11 @@ public class PlayerHealth : MonoBehaviour
         while(currentHealth <= maxHealth){
             yield return new WaitForSeconds(gainHealthTime);
             currentHealth += 10f;
+            healthSlider.value += 10;
         }
         if(currentHealth > maxHealth){
             currentHealth = maxHealth;
+            healthSlider.value = maxHealth;
         }
         canRegenerate = true;
     }
