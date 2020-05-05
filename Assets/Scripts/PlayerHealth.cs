@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 public class PlayerHealth : MonoBehaviour
 {
     public static PlayerHealth singleton;
@@ -69,6 +69,7 @@ public class PlayerHealth : MonoBehaviour
         StopAllCoroutines();
         Debug.Log("player is dead");
         healthSlider.value = 0;
+        SceneManager.LoadScene(2);
     }
 
     IEnumerator RegenerateHealth(){

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class EnemyScript : MonoBehaviour
 {
 
@@ -47,7 +47,7 @@ public class EnemyScript : MonoBehaviour
         }
         if(spawner.enemiesKilled >= spawner.enemySpawnAmt){
             if(spawner.waveNumber > 10){
-                return;
+                SceneManager.LoadScene(3);
             }
             Debug.Log("Starting next round");
             StartCoroutine(spawner.NextWave());
