@@ -1137,6 +1137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyHealth: 100
+  maxAmmo: {fileID: 8344162507535997208, guid: 35f768f7fa2214117adee8431a48bc75, type: 3}
 --- !u!114 &1836810855692655556
 MonoBehaviour:
   m_ObjectHideFlags: 0

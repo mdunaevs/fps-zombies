@@ -33,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start(){
         pistolScript = pistol.GetComponent<PistolScript>();
+        akmScript = akm.GetComponent<AKMScript>();
     }
 
     // Update is called once per frame
