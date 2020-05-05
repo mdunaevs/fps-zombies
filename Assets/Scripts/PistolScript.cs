@@ -24,6 +24,8 @@ public class PistolScript : MonoBehaviour
     private bool isReloading = false;
 
     public Animator animator;
+    AudioSource gunAS;
+    public AudioClip shootSound;
 
     public bool ironSightsOn = false;
     public GameObject crossHair;
@@ -31,10 +33,14 @@ public class PistolScript : MonoBehaviour
     int initFOV = 60;
     int destFOV = 30;
     float smoothFOV = 3f;
+
+
     void Start(){
         currentAmmo = maxMag;
         initialAmmo = maxAmmo;
         mainCam = Camera.main;
+        gunAS = GetComponent<AudioSource>();
+
     }
 
 
@@ -44,7 +50,7 @@ public class PistolScript : MonoBehaviour
 
         if(Input.GetButtonDown("Fire2")) {
             ironSightsOn = true;
-            crossHair.SetActive(false);
+            //crossHair.SetActive(false);
             animator.SetBool("IronSightsOn", true);
             
         } else if(Input.GetButtonUp("Fire2")) {
@@ -103,6 +109,7 @@ public class PistolScript : MonoBehaviour
     void Shoot(){
         currentAmmo --;
         muzzleFlash.Play();
+        gunAS.PlayOneShot(shootSound);
         RaycastHit hit;
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range)){
             if(hit.transform.tag == "Enemy"){

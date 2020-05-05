@@ -25,6 +25,8 @@ public class AKMScript : MonoBehaviour
     private bool isReloading = false;
 
     public Animator animator;
+    AudioSource gunAS;
+    public AudioClip shootSound;
 
     public bool ironSightsOn = false;
     public GameObject crossHair;
@@ -36,6 +38,7 @@ public class AKMScript : MonoBehaviour
         currentAmmo = maxMag;
         initialAmmo = maxAmmo;
         mainCam = Camera.main;
+        gunAS = GetComponent<AudioSource>();
     }
 
 
@@ -45,7 +48,7 @@ public class AKMScript : MonoBehaviour
 
         if(Input.GetButtonDown("Fire2")) {
             ironSightsOn = true;
-            crossHair.SetActive(false);
+            //crossHair.SetActive(false);
             animator.SetBool("IronSightsOn", true);
             
         } else if(Input.GetButtonUp("Fire2")) {
@@ -104,6 +107,7 @@ public class AKMScript : MonoBehaviour
     void Shoot(){
         currentAmmo --;
         muzzleFlash.Play();
+        gunAS.PlayOneShot(shootSound);
         RaycastHit hit;
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range)){
             if(hit.transform.tag == "Enemy"){
