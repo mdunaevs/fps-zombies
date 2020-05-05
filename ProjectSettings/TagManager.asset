@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - Head
+  - MaxAmmo
   layers:
   - Default
   - TransparentFX

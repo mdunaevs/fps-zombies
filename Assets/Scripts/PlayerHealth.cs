@@ -14,6 +14,11 @@ public class PlayerHealth : MonoBehaviour
     private bool canRegenerate = true;
     public bool isDead = false;
     public Slider healthSlider;
+    public Color damageColor;
+    public Image damageImage;
+    float colorSmoothing = 6f;
+    bool isTakingDamage = false;
+
 
     private void Awake(){
         singleton = this;
@@ -29,6 +34,17 @@ public class PlayerHealth : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isTakingDamage){
+            damageImage.color = new Color(damageColor.r, damageColor.g, damageColor.b, damageColor.a * ((maxHealth - currentHealth) / maxHealth));
+        } else {
+            Color color = Color.clear;
+            if ((maxHealth - currentHealth) == 10){
+                color = new Color(damageColor.r, damageColor.g, damageColor.b, damageColor.a * ((maxHealth - currentHealth) / maxHealth));
+            }
+            damageImage.color = Color.Lerp(damageImage.color, color, colorSmoothing * Time.deltaTime);
+
+        }
+        
         if(currentHealth <= 0){
             Dead();
             return;
@@ -38,10 +54,12 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+
     public void DamagePlayer(float damage){
         if(currentHealth > 0){
             currentHealth -= damage;
             healthSlider.value -= damage;
+            isTakingDamage = true;
         }
         
     }
@@ -59,6 +77,7 @@ public class PlayerHealth : MonoBehaviour
             yield return new WaitForSeconds(gainHealthTime);
             currentHealth += 10f;
             healthSlider.value += 10;
+            isTakingDamage = false;
         }
         if(currentHealth > maxHealth){
             currentHealth = maxHealth;

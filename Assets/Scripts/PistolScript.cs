@@ -8,12 +8,12 @@ public class PistolScript : MonoBehaviour
     public float range = 100f;
     public float fireRate = 1f;
     public int maxAmmo = 60;
-    private int initialAmmo;
+    public int initialAmmo;
     public int maxMag = 10;
     private int currentAmmo;
     public float reloadTime = 1f;
 
-    public GameObject impactEffect;
+    //public GameObject impactEffect;
 
     public Camera fpsCam;
 
@@ -113,8 +113,8 @@ public class PistolScript : MonoBehaviour
                 enemyScript.DeductHealth(3 * damage);
             }
             Debug.Log(hit.transform.name);
-            GameObject impactGO = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
-            Destroy(impactGO, 2f);
+            //GameObject impactGO = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
+            //Destroy(impactGO, 2f);
         }
     }
     void PistolMuzzleFlash(){
