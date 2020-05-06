@@ -5,6 +5,8 @@ using UnityEngine;
 public class WeaponManager : MonoBehaviour
 {
     public GameObject[] weapons;
+    public GameObject[] ammoDisplay;
+
     
     // Start is called before the first frame update
     void Start()
@@ -25,16 +27,19 @@ public class WeaponManager : MonoBehaviour
     void UnequipWeapons(){
         for (int i = 0; i < weapons.Length; i++){
             weapons[i].SetActive(false);
+            ammoDisplay[i].SetActive(false);
         }
     }
 
     void EquipPistol(){
         UnequipWeapons();
         weapons[0].SetActive(true);
+        ammoDisplay[0].SetActive(true);
     }
 
     void EquipAKM(){
         UnequipWeapons();
         weapons[1].SetActive(true);
+        ammoDisplay[1].SetActive(true);
     }
 }

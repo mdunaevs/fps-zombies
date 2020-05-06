@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AKMScript : MonoBehaviour
 {
@@ -34,17 +35,22 @@ public class AKMScript : MonoBehaviour
     int initFOV = 60;
     int destFOV = 30;
     float smoothFOV = 3f;
+
+    public Text currentAmmoText;
+    public Text carriedAmmoText;
+
     void Start(){
         currentAmmo = maxMag;
         initialAmmo = maxAmmo;
         mainCam = Camera.main;
         gunAS = GetComponent<AudioSource>();
+        UpdateAmmoUI();
     }
 
 
     // Update is called once per frame
     void Update()
-    {
+    {   
 
         if(Input.GetButtonDown("Fire2")) {
             ironSightsOn = true;
@@ -62,7 +68,7 @@ public class AKMScript : MonoBehaviour
             mainCam.fieldOfView = Mathf.Lerp(mainCam.fieldOfView, initFOV, smoothFOV * Time.deltaTime);
         }
 
-        if (maxAmmo <= 0){
+        if (maxAmmo <= 0 && currentAmmo <= 0){
             return;
         }
 
@@ -89,6 +95,12 @@ public class AKMScript : MonoBehaviour
 
     }
 
+    public void UpdateAmmoUI(){
+        currentAmmoText.text = currentAmmo.ToString();
+        carriedAmmoText.text = maxAmmo.ToString();
+
+    }
+
     IEnumerator Reload(){
         isReloading = true;
         animator.SetBool("reloading", true);
@@ -101,6 +113,7 @@ public class AKMScript : MonoBehaviour
             currentAmmo = maxMag;
             maxAmmo = maxAmmo - maxMag;
         }
+        UpdateAmmoUI();
         isReloading = false;
     }
 
@@ -108,6 +121,7 @@ public class AKMScript : MonoBehaviour
         currentAmmo --;
         muzzleFlash.Play();
         gunAS.PlayOneShot(shootSound);
+        UpdateAmmoUI();
         RaycastHit hit;
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range)){
             if(hit.transform.tag == "Enemy"){

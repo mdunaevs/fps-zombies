@@ -69,6 +69,8 @@ public class PlayerMovement : MonoBehaviour
         if(col.gameObject.tag == "MaxAmmo"){
             pistolScript.maxAmmo = pistolScript.initialAmmo;
             akmScript.maxAmmo = akmScript.initialAmmo;
+            akmScript.UpdateAmmoUI();
+            pistolScript.UpdateAmmoUI();
             Destroy(col.gameObject);
         }
     }
